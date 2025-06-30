@@ -24,19 +24,15 @@ class LocationImageViewSet(viewsets.ModelViewSet):
     serializer_class = LocationImageSerializer
     permission_classes = [IsAdminOrReadOnly]
 
+
 class LocationViewSet(viewsets.ModelViewSet):
     queryset = Location.objects.all()
     serializer_class = LocationSerializer
-    permission_classes = [IsAdminOrReadOnly]
-    
-    
-class LocationViewSet(viewsets.ModelViewSet):
-    queryset = Location.objects.all()
-    serializer_class = LocationSerializer
+    # permission_classes = [IsAdminOrReadOnly]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
 
-    # Fields for exact filter
     filterset_fields = ['price', 'rating', 'facilities', 'categories']
-
-    # Fields for search (text search)
     search_fields = ['title', 'description', 'location']
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)

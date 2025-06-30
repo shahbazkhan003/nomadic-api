@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_registration',
     'rest_framework_simplejwt',
-    'drf_yasg',    
+    'drf_yasg',
+    'corsheaders',    
     #Local Apps
     'accounts',
     'locations',
@@ -57,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'NomadicAPI.urls'
@@ -141,7 +143,7 @@ REST_REGISTRATION = {
     'REGISTER_VERIFICATION_ENABLED': False,
     'REGISTER_EMAIL_VERIFICATION_ENABLED':False,
     'RESET_PASSWORD_VERIFICATION_ENABLED': True,
-    'RESET_PASSWORD_VERIFICATION_URL': 'http://localhost:8000/reset-password/',
+    'RESET_PASSWORD_VERIFICATION_URL': 'http://localhost:3000/reset-password/',
     'VERIFICATION_FROM_EMAIL': 'shahbazkhan@gmail.com',
 }
 
@@ -172,3 +174,11 @@ SWAGGER_SETTINGS = {
     },
     'USE_SESSION_AUTH': False, 
 }
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # 60 minutes ke liye valid rahega
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),     # Refresh token 7 din valid
+}
+
+CORS_ALLOW_ALL_ORIGINS = True

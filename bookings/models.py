@@ -10,6 +10,8 @@ class Schedule(models.Model):
     adults = models.PositiveIntegerField(default=1)
     children = models.PositiveIntegerField(default=0)
     babies = models.PositiveIntegerField(default=0)
+    rental_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    service_fee = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     payment_status = models.BooleanField(default=False)
     

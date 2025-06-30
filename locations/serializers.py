@@ -18,8 +18,8 @@ class LocationImageSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class LocationSerializer(serializers.ModelSerializer):
-    facilities = serializers.PrimaryKeyRelatedField(queryset=Facility.objects.all(), many=True)
-    categories = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), many=True)
+    facilities = serializers.PrimaryKeyRelatedField(many=True,queryset=Facility.objects.all())
+    categories = serializers.PrimaryKeyRelatedField(many=True,queryset=Category.objects.all())
     images = LocationImageSerializer(many=True, read_only=True)
 
     class Meta:
